@@ -14,5 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
+Auth::routes();
+
+Route::resource('clientes', App\Http\Controllers\clienteController::class)->middleware('auth');
+Route::resource('automoviles', App\Http\Controllers\automovilController::class)->middleware('auth');
+Route::resource('marcas', App\Http\Controllers\marcaController::class)->middleware('auth');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
