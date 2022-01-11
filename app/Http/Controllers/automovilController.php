@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\automovil;
+
 class automovilController extends Controller
 {
     /**
@@ -34,7 +36,9 @@ class automovilController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $automovil = new automovil;
+        $automovil->nombre = $request->input('nombre');
+        $automovil->save();
     }
 
     /**
@@ -45,7 +49,7 @@ class automovilController extends Controller
      */
     public function show($id)
     {
-        //
+        return automovil::findOrFail($id);
     }
 
     /**
@@ -79,6 +83,7 @@ class automovilController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $automovil = automovil::findOrFail($id);
+        $automovil->delete();
     }
 }

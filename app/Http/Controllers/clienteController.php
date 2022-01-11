@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\cliente;
+
 class clienteController extends Controller
 {
     /**
@@ -13,7 +15,7 @@ class clienteController extends Controller
      */
     public function index()
     {
-        //
+        return cliente::all();
     }
 
     /**
@@ -34,7 +36,9 @@ class clienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cliente = new cliente;
+        $cliente->nombre = $request->input('nombre');
+        $cliente->save();
     }
 
     /**
@@ -45,7 +49,7 @@ class clienteController extends Controller
      */
     public function show($id)
     {
-        //
+        return cliente::findOrFail($id);
     }
 
     /**
@@ -79,6 +83,7 @@ class clienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cliente = cliente::findOrFail($id);
+        $cliente->delete();
     }
 }

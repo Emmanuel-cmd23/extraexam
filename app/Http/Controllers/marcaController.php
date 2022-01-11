@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\marca;
+
 class marcaController extends Controller
 {
     /**
@@ -34,7 +36,9 @@ class marcaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $marca = new marca;
+        $marca->nombre = $request->input('nombre');
+        $marca->save();
     }
 
     /**
@@ -45,7 +49,7 @@ class marcaController extends Controller
      */
     public function show($id)
     {
-        //
+        return marca::findOrFail($id);
     }
 
     /**
@@ -79,6 +83,7 @@ class marcaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $marca = marca::findOrFail($id);
+        $marca->delete();
     }
 }
